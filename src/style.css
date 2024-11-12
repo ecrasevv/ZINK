@@ -1,0 +1,49 @@
+/* GENERAL RULES */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* BODY RULES */
+body {
+    background-color: #7E00D1;
+    color: #FFFFFF; 
+}
+
+/* HEADERS RULES */
+
+/* login header */
+.h-login {
+    font-size: 7em;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+
+/* home header */
+.h-home {
+}
+
+/* profile header */
+.h-profile {
+}
+
+/* tokens header */
+.h-tokens {
+}
+
+/* VISIBILITY RULES */
+.login-page,
+.home-page,
+.profile-page,
+.tokens-page {
+    display: none;
+}
+
+.login > .login-page,
+.home > .home-page,
+.profile > .profile-page,
+.tokens > .tokens-page {
+    display: block;
+}
