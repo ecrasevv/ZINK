@@ -15,30 +15,43 @@
 
     <body>
 
-            <!-- The value of 'main' determines the page displayed -->
-            <main class="login">
+        <!-- The value of 'main' determines the page displayed -->
+        <main class="login">
 
-                <!-- login page -->
-                <div class="login-page">
-                    <h1 class="h-login">LOGIN</h1>
+            <!-- login page -->
+            <div class="login-page">
+                <!-- right login-box -->
+                <div class="box-right">
+                    <h2>Welcome</h2>
+                    <p>Welcome to our site...</p>
                 </div>
-
-                <!-- home page -->
-                <div class="home-page">
-                    <h1 class="h-home">HOME</h1>
+                <!-- left login-box -->
+                <div class="box-left">
+                    <form class="login-form">
+                        <h2>Login</h2>
+                        <input type="text" name="uemail" id="uemail" required>
+                        <input type="text" name="upsswd" id="upsswd" reqiured>
+                        <button type="submit">Login</button>
+                    </form>
                 </div>
+            </div>
 
-                <!-- profile + leaderboard page -->
-                <div class="profile-page">
-                    <h1 class="h-profile">PROFILE</h1>
-                </div>
+            <!-- home page -->
+            <div class="home-page">
+                <h1 class="h-home">HOME</h1>
+            </div>
 
-                <!-- tokens page -->
-                <div class="tokens-page">
-                    <h1 class="h-tokens">TOKENS</h1>
-                </div>
+            <!-- profile + leaderboard page -->
+            <div class="profile-page">
+                <h1 class="h-profile">PROFILE</h1>
+            </div>
 
-            </main>
+            <!-- tokens page -->
+            <div class="tokens-page">
+                <h1 class="h-tokens">TOKENS</h1>
+            </div>
+
+        </main>
 
         <script src="script.js"></script>
     </body>
