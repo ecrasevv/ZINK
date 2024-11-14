@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home - ZINK!</title>
+        <title>Login - ZINK!</title>
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
@@ -20,10 +20,14 @@
             </nav>
         </header>
 
-        <!-- Home -->
-        <main class="home-content">
-            <h1>ZINK!</h1>
-            <p>ZINK! is a web app created with the aim of keeping your mind always trained. Take new quizzes every day and earn more and more tokens, climb the rankings and become the first!</p>
+        <!-- Login form -->
+        <main>
+            <h1>Login</h1>
+            <form action="index.html" method="POST">
+                <input type="text" name="umail" placeholder="example@studenti.uniparthenope.it" required>
+                <input type="text" name="upsswd" placeholder="password" required>
+                <button type="submit">Login</button>
+            </form>
         </main>
 
         <script src="js/script.js"></script>
