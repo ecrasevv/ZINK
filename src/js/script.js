@@ -17,6 +17,7 @@ const quizData = [
 const quizContainer = document.getElementById('quiz');
 const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
+const showAnswer = document.getElementById('show-incorrect-ans');
 
 let index = 0;
 let userScore = 0;
@@ -77,8 +78,8 @@ function checkUserAnswer() {
         } else {
             incorrectAnswer.push({
                 question: quizData[index].question,
-                incorrectAnswer: answer,
-                corretAnswer: quizData[index].answer,
+                incorrect: answer,
+                correct: quizData[index].answer,
             });
         }
         // increment -> goto next question in quizData
@@ -100,9 +101,29 @@ function checkUserAnswer() {
 function displayResult() {
     quizContainer.style.display = 'none';
     submitButton.style.display = 'none';
-    quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${userCoins}!`;
+    // if the user has answered at least one question incorrectly 
+    if (incorrectAnswer.length > 0) {
+        showAnswer.style.display = 'block';
+        showAnswer.style.margin = '10px auto 0';
+        showAnswer.style.textAlign = 'center';
+    }
+
+    quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${userCoins}!<br>`;
 }
 
-submitButton.addEventListener('click', checkUserAnswer);
-displayQuestion()
+function displayIncorrectAnswer() {
+    showAnswer.style.display = 'none';
+    for (let i = 0; i < incorrectAnswer.length; i++) {
+        quizResult.innerHTML += 
+        `
+        <br>Qestion: ${incorrectAnswer[i].question}<br>
+        Your guess: ${incorrectAnswer[i].incorrect}<br>
+        Correct guess: ${incorrectAnswer[i].correct}<br>
+        `
+    }
+}
 
+showAnswer.style.display = 'none';
+submitButton.addEventListener('click', checkUserAnswer);
+showAnswer.addEventListener('click', displayIncorrectAnswer);
+displayQuestion()
