@@ -4,11 +4,13 @@ const quizData = [
         question: 'How much is 2+2?',
         options: ['5', '4', '10', '8'],
         answer: '4',
+        difficult: 0.1,
     },
     {
         question: 'What is the capital of Italy?',
         options: ['Rome', 'Tourin', 'Milan', 'Naples'],
         answer: 'Rome',
+        difficult: 0.3,
     }
 ]
 
@@ -18,6 +20,7 @@ const submitButton = document.getElementById('submit');
 
 let index = 0;
 let userScore = 0;
+let userCoins = 0;
 let incorrectAnswer = [];
 
 function displayQuestion() {
@@ -54,6 +57,13 @@ function displayQuestion() {
     quizContainer.appendChild(quizOptionsDiv);
 }
 
+// multiply the difficult value of the passed question * 10
+// add the result to the userCoin
+function calculateCoins(quizItem) {
+    userCoins = userCoins + quizItem.difficult * 10;
+    return userCoins;
+}
+
 function checkUserAnswer() {
     const userSelectedOption = document.querySelector('input[name="quiz"]:checked');
 
@@ -63,6 +73,7 @@ function checkUserAnswer() {
         // for now the questions will be asked in the same order as they are present within quizData 
         if (answer === quizData[index].answer) {
             userScore++;
+            userCoins = calculateCoins(quizData[index]);
         } else {
             incorrectAnswer.push({
                 question: quizData[index].question,
@@ -89,7 +100,7 @@ function checkUserAnswer() {
 function displayResult() {
     quizContainer.style.display = 'none';
     submitButton.style.display = 'none';
-    quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}!`;
+    quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${userCoins}!`;
 }
 
 submitButton.addEventListener('click', checkUserAnswer);
