@@ -263,10 +263,6 @@ main {
     font-weight: 300;
 }
 
-.quiz-content .hide {
-    display: none;
-}
-
 .quiz-question {
   font-weight: bold;
   margin-bottom: 10px;
