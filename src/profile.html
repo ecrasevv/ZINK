@@ -22,11 +22,29 @@
         </header>
 
         <!-- Profile -->
-        <main>
-            <h1>Profile</h1>
-            <p>Personal profile.</p>
+        <main class="profile-content">
+            <div class="text-container">
+                <h1>Profile</h1>
+			<div class = "profile-container">
+				<div class = "profile-smallContainer">
+					<img src = "../img/defaultProfile2.png"  width = "300" height = "300">
+					<div class = "profile-smallContainer1"> </div>
+					<button type = "submit"> Edit Profile </button>
+				</div>
+				
+				<div class = "profile-additionalsmallContainer">
+					<div class = "profile-additionalsmallContainer1"> 
+						<canvas id= "quizChart" width= "300" height= "230"></canvas>
+						</div>
+					<div class = "profile-additionalsmallContainer2"> </div>
+				</div>
+			</div>
+				
+            </div>
         </main>
 
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src= "js/charts.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>
