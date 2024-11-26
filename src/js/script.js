@@ -1,4 +1,4 @@
-let chartData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
+let chartData = JSON.parse(sessionStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 
 /// example quiz, array of objects
 const quizData = [
@@ -96,12 +96,8 @@ function checkUserAnswer() {
         if (index < quizData.length) {
             displayQuestion();
         } else {
-            chartData[todayIndex] = userScore;
-            localStorage.setItem('chartData', JSON.stringify(chartData));
-
-            // DDD
-            console.log("chartData loaded: ", JSON.parse(localStorage.getItem('chartData')));
-
+            chartData[todayIndex] += userScore;
+            sessionStorage.setItem('chartData', JSON.stringify(chartData));
             displayResult();
         }
     }
@@ -140,10 +136,7 @@ function displayIncorrectAnswer() {
 // using Chart.js to visualize user performance for the week
 function showUserChart() {
     const xValuesDays = ["D", "L", "M", "M", "G", "V", "S"];
-    const storedChartData = JSON.parse(localStorage.getItem('chartData')) || [0, 0, 0, 0, 0, 0, 0];
-
-    // DDD
-    console.log("data pulled: ", storedChartData);
+    const storedChartData = JSON.parse(sessionStorage.getItem('chartData')) || [0, 0, 0, 0, 0, 0, 0];
 
     new Chart("userProgressChart", {
         type: "bar",
@@ -178,10 +171,6 @@ function showUserChart() {
 // show the userChart when the profile-page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
-
-    // DDD
-    console.log("loaded page: ", pageId);
-
     if (pageId == "profile-page") {
         showUserChart();
     }
