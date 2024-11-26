@@ -1,4 +1,3 @@
-
 const ctx = document.getElementById('quizChart').getContext('2d');
 
 let savedData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
@@ -6,7 +5,7 @@ let savedData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 const data = {
 	labels:['Sunday','Monday', 'Thursday', 'Wednesday', 'Tuesday', 'Friday','Saturday'],
 	datasets: [ {
-		label: 'Risposte Corrette',
+		label: 'Correct answers',
 		data: savedData,
 		backgroundColor: 'rgba(153, 102, 255, 0.2)',
 		borderColor: 'rgba(153, 102, 255, 1)',
@@ -21,7 +20,7 @@ const options = {
 			beginAtZero: true
 		}
 	}
-};
+}
 
 let chart = new Chart(ctx, {
 	type: 'bar',
@@ -38,6 +37,6 @@ function updateChart() {
 	
 	localStorage.setItem('charData',JSON.stringify(data.datasets[0].data));
 	
-	console.log('Dati salvati e aggiornati:', data.datasets[0].data);
+	console.log('Data saved and updated:', data.datasets[0].data);
 }
 
