@@ -285,7 +285,6 @@ main {
   font-weight: bold;
 }
 
-
 /*PROFILE*/
 .profile-content {
     background-image: url('../../img/bg.png');
@@ -298,8 +297,46 @@ main {
     display: flex;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 }
 
+.profile-content .text-container h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 
+        0 0 30px #B66EE8;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+}
+
+.profile-imgName {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.profile-modifyButton {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    background-color: #964ABD;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1rem; 
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 
+        0 0 50px #B66EE8;
+}
+
+.profile-modifyButton:hover {
+    background-color: #36175E;
+}
 
 .profile-content .profile-container {
     display: flex;
@@ -315,89 +352,17 @@ main {
     border-radius: 20px;
 }
 
-
-.profile-container .profile-smallContainer {
+.profile-rightContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width:350px;
-	height: 550px;
-	background-color: #fff;
-	color: #000;
-	padding: 15px;
-	border: 1px solid #ddd;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	border-radius: 10px;
-	margin-top: 10px;
-}
-
-
-.profile-smallContainer .profile-smallContainer1 {
-	width: 78%;
-	height: 40px;
-	background-color: #f9f9f9;
-	color: #000;
-	padding: 15px;
-	border: 1px solid #ddd;
-	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-	border-radius: 10px;
-	margin-top: 50px;
-}
-
-
-
-.profile-smallContainer .profile-image {
-	width: 500px;
-	height: 500px;
-	border-radius: 10px;
-	margin-top: 10px;
-	margin-right: 1px;
-	margin-bottom: 25px;
-}
-
-
-.profile-smallContainer .text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    text-align: left;
-}
-
-.profile-container h1 {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 
-        0 0 30px #B66EE8;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-}
-
-.profile-smallContainer button {
-  display: inline-block;
-  width: 78%;
-  padding: 10px 20px;
-  background-color: #964ABD;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 4px;
-  margin-right: 1px;
-  margin-top: 10px;
-}
-
-.profile-container .profile-additionalsmallContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	width:520px;
+	width: 520px;
 	height: 550px;
 	margin-top: 10px;
 	margin-left: 30px;
 }
 
-.profile-additionalsmallContainer .profile-additionalsmallContainer1 {
+.profile-rightContainer .profile-rightUpContainer {
 	width: 100%;
 	height: 270px;
 	background-color: #fff;
@@ -407,10 +372,13 @@ main {
 	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	border-radius: 10px;
 	margin-top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-
-.profile-additionalsmallContainer .profile-additionalsmallContainer2 {
+.profile-rightContainer .profile-rightLowContainer {
 	width: 100%;
 	height: 270px;
 	background-color: #fff;
