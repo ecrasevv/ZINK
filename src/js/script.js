@@ -1,3 +1,5 @@
+let chartData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
+
 /// example quiz, array of objects
 const quizData = [
     {
@@ -23,8 +25,6 @@ let index = 0;
 let userScore = 0;
 let userCoins = 0;
 let incorrectAnswer = [];
-
-let chartData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 
 function displayQuestion() {
     const questionInfo = quizData[index];
@@ -67,19 +67,9 @@ function calculateCoins(quizItem) {
     return userCoins;
 }
 
-function updateChart() {
-	let dayIndex = new Date().getDay();
-	
-	data.datasets[0].data[dayIndex]++;
-	chart.update();
-	
-	localStorage.setItem('charData',JSON.stringify(data.datasets[0].data));
-	
-	console.log('Dati salvati e aggiornati:', data.datasets[0].data);
-}
-
 function checkUserAnswer() {
     const userSelectedOption = document.querySelector('input[name="quiz"]:checked');
+    const todayIndex = new Date().getDay();
 
     if (userSelectedOption != null) {
         const answer = userSelectedOption.value;
@@ -88,9 +78,6 @@ function checkUserAnswer() {
         if (answer === quizData[index].answer) {
             userScore++;
             userCoins = calculateCoins(quizData[index]);
-			
-			updateChart();
-			
         } else {
             incorrectAnswer.push({
                 question: quizData[index].question,
@@ -109,6 +96,12 @@ function checkUserAnswer() {
         if (index < quizData.length) {
             displayQuestion();
         } else {
+            chartData[todayIndex] = userScore;
+            localStorage.setItem('chartData', JSON.stringify(chartData));
+
+            // DDD
+            console.log("chartData loaded: ", JSON.parse(localStorage.getItem('chartData')));
+
             displayResult();
         }
     }
@@ -117,6 +110,7 @@ function checkUserAnswer() {
 function displayResult() {
     quizContainer.style.display = 'none';
     submitButton.style.display = 'none';
+
     // if the user has answered at least one question incorrectly 
     if (incorrectAnswer.length > 0) {
         showAnswer.style.display = 'block';
@@ -125,6 +119,10 @@ function displayResult() {
     }
 
     quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${userCoins}!<br>`;
+
+    if (document.body.id == "profile-page") {
+        showUserChart();
+    }
 }
 
 function displayIncorrectAnswer() {
@@ -139,7 +137,59 @@ function displayIncorrectAnswer() {
     }
 }
 
-showAnswer.style.display = 'none';
-submitButton.addEventListener('click', checkUserAnswer);
-showAnswer.addEventListener('click', displayIncorrectAnswer);
+// using Chart.js to visualize user performance for the week
+function showUserChart() {
+    const xValuesDays = ["D", "L", "M", "M", "G", "V", "S"];
+    const storedChartData = JSON.parse(localStorage.getItem('chartData')) || [0, 0, 0, 0, 0, 0, 0];
+
+    // DDD
+    console.log("data pulled: ", storedChartData);
+
+    new Chart("userProgressChart", {
+        type: "bar",
+        data: {
+            labels: xValuesDays,
+            datasets: [{
+                data: storedChartData,
+                backgroundColor: "rgba(141, 214, 224, 1)",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: "User Score Per Day"
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+
+// show the userChart when the profile-page is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+    const pageId = document.body.id;
+
+    // DDD
+    console.log("loaded page: ", pageId);
+
+    if (pageId == "profile-page") {
+        showUserChart();
+    }
+    if (pageId == "quiz-page") {
+        showAnswer.style.display = 'none';
+        submitButton.addEventListener('click', checkUserAnswer);
+        showAnswer.addEventListener('click', displayIncorrectAnswer);
+    }
+});
+
 displayQuestion()
