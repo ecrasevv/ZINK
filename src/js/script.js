@@ -24,6 +24,9 @@ let userScore = 0;
 let userCoins = 0;
 let incorrectAnswer = [];
 
+
+let chartData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
+
 function displayQuestion() {
     const questionInfo = quizData[index];
 
@@ -65,6 +68,18 @@ function calculateCoins(quizItem) {
     return userCoins;
 }
 
+function updateChart() {
+	let dayIndex = new Date().getDay();
+	
+	data.datasets[0].data[dayIndex]++;
+	chart.update();
+	
+	localStorage.setItem('charData',JSON.stringify(data.datasets[0].data));
+	
+	console.log('Dati salvati e aggiornati:', data.datasets[0].data);
+}
+
+
 function checkUserAnswer() {
     const userSelectedOption = document.querySelector('input[name="quiz"]:checked');
 
@@ -75,6 +90,9 @@ function checkUserAnswer() {
         if (answer === quizData[index].answer) {
             userScore++;
             userCoins = calculateCoins(quizData[index]);
+			
+			updateChart();
+			
         } else {
             incorrectAnswer.push({
                 question: quizData[index].question,
@@ -97,6 +115,7 @@ function checkUserAnswer() {
         }
     }
 }
+
 
 function displayResult() {
     quizContainer.style.display = 'none';
