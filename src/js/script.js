@@ -24,7 +24,6 @@ let userScore = 0;
 let userCoins = 0;
 let incorrectAnswer = [];
 
-
 let chartData = JSON.parse(localStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 
 function displayQuestion() {
@@ -79,7 +78,6 @@ function updateChart() {
 	console.log('Dati salvati e aggiornati:', data.datasets[0].data);
 }
 
-
 function checkUserAnswer() {
     const userSelectedOption = document.querySelector('input[name="quiz"]:checked');
 
@@ -115,7 +113,6 @@ function checkUserAnswer() {
         }
     }
 }
-
 
 function displayResult() {
     quizContainer.style.display = 'none';

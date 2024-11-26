@@ -13,7 +13,6 @@ const data = {
 	}]
 };
 
-
 const options = {
 	scales: {
 		y: {
@@ -28,7 +27,6 @@ let chart = new Chart(ctx, {
 	options: options
 });
 
-
 function updateChart() {
 	let dayIndex = new Date().getDay();
 	
@@ -39,4 +37,3 @@ function updateChart() {
 	
 	console.log('Data saved and updated:', data.datasets[0].data);
 }
-
