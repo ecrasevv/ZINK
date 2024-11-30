@@ -167,6 +167,21 @@ function showUserChart() {
     });
 }
 
+/**
+ * API
+ */
+function callApi() {
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const username = document.getElementById('usermail').value;
+        const password = document.getElementById('userpassword').value;
+
+        const apiUrl = `https://api.uniparthenope.it/UniparthenopeApp/v1/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+
+        /* fetch() ... */
+    });
+}
 
 // show the userChart when the profile-page is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -175,10 +190,12 @@ document.addEventListener("DOMContentLoaded", () => {
         showUserChart();
     }
     if (pageId == "quiz-page") {
+        displayQuestion()
         showAnswer.style.display = 'none';
         submitButton.addEventListener('click', checkUserAnswer);
         showAnswer.addEventListener('click', displayIncorrectAnswer);
     }
+    if (pageId == "login-page") {
+        callApi();
+    }
 });
-
-displayQuestion()
