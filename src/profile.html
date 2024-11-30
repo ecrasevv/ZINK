@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile- ZINK!</title>
         <link href="css/style.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
-    <body>
+    <body id="profile-page">
         <!-- Navbar -->
         <header>
             <nav>
@@ -40,7 +41,7 @@
                 <!-- profile right container: chart, info -->
                 <div class="profile-rightContainer">
                     <div class="profile-rightUpContainer"> 
-                        <canvas id="quizChart" width="300" height="230"></canvas>
+                        <canvas id="userProgressChart"></canvas>
                     </div>
                     <div class="profile-rightLowContainer"> 
                         <p>smth...</p>
@@ -49,8 +50,6 @@
             </div>
         </main>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src= "js/charts.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>
