@@ -24,11 +24,13 @@
         <!-- Login form -->
         <main class="login-content">
             <h1>Login</h1>
-            <form class="login-f" action="index.html" method="POST">
-                <input type="text" name="umail" placeholder="example@studenti.uniparthenope.it" required>
-                <input type="password" name="upsswd" placeholder="password" required>
+            <form id="loginForm" class="login-f" method="POST">
+                <input type="text" id="usermail" name="usermail" placeholder="example@studenti.uniparthenope.it" required>
+                <input type="password" id="userpassword" name="userpassword" placeholder="password" required>
                 <button type="submit">Login</button>
             </form>
+            <div id="message">
+            </div>
         </main>
 
         <script src="js/script.js"></script>
