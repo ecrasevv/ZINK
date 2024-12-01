@@ -172,7 +172,7 @@ function showUserChart() {
  */
 function callApi() {
     document.getElementById("loginForm").addEventListener("submit", function (event) {
-        event.preventDefault();
+        //event.preventDefault();
 
         const username = document.getElementById('usermail').value;
         const password = document.getElementById('userpassword').value;
