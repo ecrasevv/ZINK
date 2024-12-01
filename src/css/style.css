@@ -390,3 +390,82 @@ main {
 	border-radius: 10px;
 	margin-top: 27px;
 }
+
+
+/*leaderboard form*/
+
+.leaderboard-content {
+    background-image: url('../../img/bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.leaderboard-content .text-container h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 
+        0 0 30px #B66EE8;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+}
+
+
+/*container for the tabs*/
+
+.leaderboard-content .leaderboard-container {
+	display: inline-block;
+	height: 400px;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #6a0dad;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+.leaderboard-container .leaderboard-tabs ul {
+	display: flex;
+	justify-content: flex-start;
+	list-style: none
+}
+
+.leaderboard-container .leaderboard-tabs ul li {
+	margin-right: 40px;
+	font-size: 25px;
+	font-weight: 600px;
+	color: #3a3d51;
+	cursor: pointer;
+	
+}
+
+.leaderboard-container .leaderboard-tabs ul li:hover,
+.leaderboard-container .leaderboard-tabs ul li.active{
+	color: #fff;
+}
+
+.leaderboard-content .leaderboard-wrapper {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width:500px;
+	height: 100%;
+	background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+	padding: 20px;
+}
+
+.leaderboard-wrapper .lboard_item{
+	padding: 25px;
+}
