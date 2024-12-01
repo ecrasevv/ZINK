@@ -21,6 +21,13 @@ const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
 
+// for leaderboard
+var tabs = document.querySelectorAll(".leaderboard-tabs ul li");
+var today = document.querySelector(".today");
+var month = document.querySelector(".month");
+var year = document.querySelector(".year");
+var items = document.querySelectorAll(".lboard_item");
+
 let index = 0;
 let userScore = 0;
 let userCoins = 0;
@@ -183,7 +190,33 @@ function callApi() {
     });
 }
 
-// show the userChart when the profile-page is fully loaded
+function leaderboard() {
+    tabs.forEach(function(tab) {
+        tab.addEventListener("click", function() {
+            var currenttab = tab.getAttribute("data-li");
+
+            tabs.forEach(function(tab) {
+                tab.classList.remove("active");
+            })
+
+            tab.classList.add("active");
+
+            items.forEach(function(item) {
+                item.style.display = "none";
+            })
+
+            if (currenttab == "today") {
+                today.style.display = "block";
+            } else if (currenttab == "month") {
+                month.style.display = "block";
+            } else {
+                year.style.display = "block";
+            }
+        })
+    })
+}
+
+// handle content based on page id
 document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
     if (pageId == "profile-page") {
@@ -198,38 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (pageId == "login-page") {
         callApi();
     }
+    if (pageId == "leaderboard-page") {
+        leaderboard();
+    }
 });
 
-/*code for leaderboard*/
-var tabs = document.querySelectorAll(".leaderboard-tabs ul li");
-var today = document.querySelector(".today");
-var month = document.querySelector(".month");
-var year = document.querySelector(".year");
-var items = document.querySelectorAll(".lboard_item");
-
-tabs.forEach(function(tab){
-	tab.addEventListener("click", function(){
-		var currenttab = tab.getAttribute("data-li");
-		
-		tabs.forEach(function(tab){
-			tab.classList.remove("active");
-		})
-
-		tab.classList.add("active");
-
-		items.forEach(function(item){
-			item.style.display = "none";
-		})
-
-		if(currenttab == "today"){
-			today.style.display = "block";
-		}
-		else if(currenttab == "month"){
-			month.style.display = "block";
-		}
-		else{
-			year.style.display = "block";
-		}
-
-	})
-})
