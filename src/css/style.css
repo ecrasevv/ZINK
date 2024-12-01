@@ -427,6 +427,8 @@ main {
     border-radius: 20px;
 	position: relative;
 	margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
 }
 
 .leaderboard-container .leaderboard-tabs ul {
@@ -452,7 +454,7 @@ main {
 .leaderboard-content .leaderboard-wrapper {
 	position: absolute;
 	top: 60px;
-	left: 0;
+	left: auto;
 	width:500px;
 	height: 100%;
 	background-color: #fff;
@@ -463,4 +465,5 @@ main {
 
 .leaderboard-wrapper .lboard_item{
 	padding: 25px;
+    color: #000000;
 }
