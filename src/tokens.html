@@ -22,9 +22,32 @@
         </header>
 
         <!-- Tokens -->
-        <main>
-            <h1>Tokens</h1>
-            <p>Tokens and leaderboard.</p>
+        <main class ="leaderboard-content" >
+		
+			<div class="text-container">
+					<h1>Leaderboard</h1>
+            </div>
+			
+            <div class = "leaderboard-container">
+				<div class="leaderboard-tabs">
+					<div class="tabs">
+						<ul>
+							<li class="active" data-li="today">Today</li>
+							<li data-li="month">Month</li>
+							<li data-li="year">Year</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class = "leaderboard-wrapper">
+					<div class="lboard_item today" style="display: none;">
+					</div>
+					<div class="lboard_item month" style="display: none;">
+					</div>
+					<div class="lboard_item year" style="display: none;">
+					</div>
+				</div>
+			</div>
         </main>
 
         <script src="js/script.js"></script>
