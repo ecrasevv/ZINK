@@ -391,9 +391,7 @@ main {
 	margin-top: 27px;
 }
 
-
-/*leaderboard form*/
-
+/* LEADERBOARD */
 .leaderboard-content {
     background-image: url('../../img/bg.png');
     background-size: cover;
@@ -417,9 +415,6 @@ main {
     margin-bottom: 1rem;
     margin-top: 5rem;
 }
-
-
-/*container for the tabs*/
 
 .leaderboard-content .leaderboard-container {
 	display: inline-block;
