@@ -20,8 +20,10 @@ const quizContainer = document.getElementById('quiz');
 const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
+let profileName;
 
 // for leaderboard
+/*! try to use getElementById() */
 var tabs = document.querySelectorAll(".leaderboard-tabs ul li");
 var today = document.querySelector(".today");
 var month = document.querySelector(".month");
@@ -178,42 +180,19 @@ function showUserChart() {
  * API
  */
 function callApi() {
-    document.getElementById("loginForm").addEventListener("submit", function (event) {
-        //event.preventDefault();
+}
 
-        const username = document.getElementById('usermail').value;
-        const password = document.getElementById('userpassword').value;
+// get the username from the login form
+function getProfileName() {
+}
 
-        const apiUrl = `https://api.uniparthenope.it/UniparthenopeApp/v1/login?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-
-        /* fetch() ... */
-    });
+// set the name of the user in the profile page
+function setProfileName() {
 }
 
 function leaderboard() {
-    tabs.forEach(function(tab) {
-        tab.addEventListener("click", function() {
-            var currenttab = tab.getAttribute("data-li");
-
-            tabs.forEach(function(tab) {
-                tab.classList.remove("active");
-            })
-
-            tab.classList.add("active");
-
-            items.forEach(function(item) {
-                item.style.display = "none";
-            })
-
-            if (currenttab == "today") {
-                today.style.display = "block";
-            } else if (currenttab == "month") {
-                month.style.display = "block";
-            } else {
-                year.style.display = "block";
-            }
-        })
-    })
+    /*! implement... */
+    /* show only the content of the selected pane */
 }
 
 // handle content based on page id
@@ -229,10 +208,10 @@ document.addEventListener("DOMContentLoaded", () => {
         showAnswer.addEventListener('click', displayIncorrectAnswer);
     }
     if (pageId == "login-page") {
-        callApi();
+        // callApi();
     }
-    if (pageId == "leaderboard-page") {
-        leaderboard();
-    }
+    //if (pageId == "leaderboard-page") {
+    //    leaderboard();
+    //}
 });
 
