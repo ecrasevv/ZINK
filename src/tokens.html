@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tokens - ZINK!</title>
         <link href="css/style.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="js/views.js"></script>
     </head>
     <body>
         <!-- Navbar -->
@@ -32,19 +34,22 @@
                 <div class="leaderboard-tabs">
                     <div class="tabs">
                         <ul>
-                            <li class="active" data-li="today">Today</li>
-                            <li data-li="month">Month</li>
-                            <li data-li="year">Year</li>
+                            <li id="td" data-li="today">TODAY</li>
+                            <li id="mt" data-li="month">MONTH</li>
+                            <li id="yr" data-li="year">YEAR</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class = "leaderboard-wrapper">
-                    <div class="lboard_item today" style="display: none;">
+                    <div class="lboard_item today" >
+                        <p id="td-content">leaderboard-today</p>
                     </div>
-                    <div class="lboard_item month" style="display: none;">
+                    <div class="lboard_item month">
+                        <p id="mt-content">leaderboard-month</p>
                     </div>
-                    <div class="lboard_item year" style="display: none;">
+                    <div class="lboard_item year">
+                        <p id="yr-content">leaderboard-year</p>
                     </div>
                 </div>
             </div>
