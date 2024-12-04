@@ -438,16 +438,15 @@ main {
 }
 
 .leaderboard-container .leaderboard-tabs ul li {
-	margin-right: 40px;
+	margin-left: 20px;
+	margin-right: 20px;
 	font-size: 25px;
 	font-weight: 600px;
 	color: #3a3d51;
 	cursor: pointer;
-	
 }
 
-.leaderboard-container .leaderboard-tabs ul li:hover,
-.leaderboard-container .leaderboard-tabs ul li.active{
+.leaderboard-container .leaderboard-tabs ul li:hover {
 	color: #fff;
 }
 
@@ -461,9 +460,12 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
 	padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 .leaderboard-wrapper .lboard_item{
-	padding: 25px;
     color: #000000;
 }
