@@ -6,8 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile- ZINK!</title>
         <link href="css/style.css" rel="stylesheet">
-        <link href="../img/simpleLogo.jpg" rel="icon">
+      <link href="../img/simpleLogo.jpg" rel="icon"> 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://js.stripe.com/v3/"></script>
     </head>
     <body id="profile-page">
         <!-- Navbar -->
@@ -17,7 +18,7 @@
                     <li><a href="index.html">HOME</a></li>
                     <li><a href="quiz.html">QUIZ</a></li>
                     <li><a href="profile.html">PROFILE</a></li>
-                    <li><a href="tokens.html">TOKENS</a></li>
+                    <li><a href="tokens.html">LEADERBOARD</a></li>
                     <li><a href="login.html">LOGIN</a></li>
                 </ul>
             </nav>
@@ -32,7 +33,7 @@
             <!-- profile left container: img, name, edit button -->
             <div class="profile-container">
                 <div class="profile-imgName">
-                    <img src="../img/defaultProfile.png" width="300" height="300">
+                   <img src="../img/defaultProfile.png" width="300" height="300"> 
                     <div class="profile-nameContainer"> 
                         <h3 id="profile-name">Your name</h3>
                     </div>
@@ -44,13 +45,20 @@
                     <div class="profile-rightUpContainer"> 
                         <canvas id="userProgressChart"></canvas>
                     </div>
-                    <div class="profile-rightLowContainer"> 
-                        <p>smth...</p>
+                    <div class="profile-rightLowContainer"> 						
+						<div id= "token-earned"></div>
+						<div class= "buybutton-container">
+							<script async src="https://js.stripe.com/v3/buy-button.js"> </script>
+								<stripe-buy-button
+									buy-button-id="buy_btn_1QT00CL4v5JpA5BJEhsEsTMk"
+									publishable-key="pk_test_51QShFGL4v5JpA5BJ2sfecTFS9QxkoPS1R4Pkb3ypy2uHX2qgtFxK14MYzrPKeCJ5kSRTkbvrg4y7BCD9LZfcF1Uk008dnASdGY"
+								>
+								</stripe-buy-button>
+						</div>
                     </div>
                 </div>
             </div>
         </main>
-
         <script src="js/script.js"></script>
     </body>
 </html>

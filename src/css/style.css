@@ -391,6 +391,16 @@ main {
 	margin-top: 27px;
 }
 
+.profile-rightContainer .buybutton-container {
+	padding-top: 140px;
+	justify-content: center;
+}
+
+.profile-rightContainer .token-earned {
+	justify-content: flex-start;
+	font-weight: bold;
+}
+
 /* LEADERBOARD */
 .leaderboard-content {
     background-image: url('../../img/bg.png');

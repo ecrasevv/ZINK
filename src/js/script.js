@@ -1,4 +1,5 @@
 let chartData = JSON.parse(sessionStorage.getItem('charData')) || [0,0,0,0,0,0,0];
+let userCoins = JSON.parse(sessionStorage.getItem("token")) || 0;
 
 /// example quiz, array of objects
 const quizData = [
@@ -20,6 +21,7 @@ const quizContainer = document.getElementById('quiz');
 const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
+const tokensEarned = document.getElementById('token-earned');
 let profileName;
 
 // for leaderboard
@@ -32,7 +34,6 @@ var items = document.querySelectorAll(".lboard_item");
 
 let index = 0;
 let userScore = 0;
-let userCoins = 0;
 let incorrectAnswer = [];
 
 function displayQuestion() {
@@ -73,6 +74,10 @@ function displayQuestion() {
 // add the result to the userCoin
 function calculateCoins(quizItem) {
     userCoins = userCoins + quizItem.difficult * 10;
+	
+	sessionStorage.setItem("token", JSON.stringify(userCoins));
+
+	
     return userCoins;
 }
 
@@ -153,7 +158,7 @@ function showUserChart() {
             labels: xValuesDays,
             datasets: [{
                 data: storedChartData,
-                backgroundColor: "rgba(141, 214, 224, 1)",
+                backgroundColor: "rgba(150, 74, 189, 1)",
                 borderWidth: 1
             }]
         },
@@ -200,6 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
     if (pageId == "profile-page") {
         showUserChart();
+		tokensEarned.innerHTML = `<br> Tokens: ${userCoins}<br>`;
     }
     if (pageId == "quiz-page") {
         displayQuestion()
@@ -213,5 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //if (pageId == "leaderboard-page") {
     //    leaderboard();
     //}
+	
+	
 });
 
