@@ -1,7 +1,7 @@
 let chartData = JSON.parse(sessionStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 let userCoins = JSON.parse(sessionStorage.getItem("token")) || 0;
 
-/// example quiz, array of objects
+/// example quiz
 const quizData = [
     {
         question: 'How much is 2+2?',
@@ -166,7 +166,7 @@ function showUserChart() {
                 },
                 title: {
                     display: true,
-                    text: "User Score Per Day"
+                    text: "Youre Score Per Day"
                 }
             },
             scales: {
@@ -182,6 +182,30 @@ function showUserChart() {
  * API
  */
 function callApi() {
+}
+
+function checkPassword() {
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function(event) {
+        const passwordInput = document.getElementById('userpassword');
+        if (passwordInput.value.length < 8) {
+            alert('password must be minimum 8 characters long.');
+            event.preventDefault();
+        }
+    });
+}
+
+function showHidePassword() {
+    document.querySelector('.show-hide-b').addEventListener('click', function() {
+        const passwordInput = document.getElementById('userpassword');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            this.textContent = 'HIDE';
+        } else {
+            passwordInput.type = 'password';
+            this.textContent = 'SHOW';
+        }
+    });
 }
 
 // get the username from the login form
@@ -212,9 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (pageId == "login-page") {
         // callApi();
+        checkPassword();
+        showHidePassword();
     }
-    //if (pageId == "leaderboard-page") {
-    //    leaderboard();
-    //}
 });
-
