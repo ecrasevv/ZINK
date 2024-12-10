@@ -8,12 +8,12 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="../img/simpleLogo.jpg" rel="icon">
     </head>
-    <body>
+    <body id="login-page">
         <!-- Navbar -->
         <header>
             <nav>
                 <ul>
-                   <li><a href="login.html">LOGIN</a></li>
+                    <li><a href="login.html">LOGIN</a></li>
                 </ul>
             </nav>
         </header>
@@ -23,7 +23,10 @@
             <h1>Login</h1>
             <form id="loginForm" class="login-f" action="/login" method="POST">
                 <input type="text" id="usermail" name="usermail" placeholder="example@studenti.uniparthenope.it" required>
-                <input type="password" id="userpassword" name="userpassword" placeholder="password" required>
+                <div class="passwd-div">
+                    <input type="password" id="userpassword" name="userpassword" placeholder="password" required>
+                    <button type="button" class="show-hide-b">SHOW</button>
+                </div>
                 <button id="login-button" type="submit">Login</button>
             </form>
         </main>
