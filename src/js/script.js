@@ -74,10 +74,7 @@ function displayQuestion() {
 // add the result to the userCoin
 function calculateCoins(quizItem) {
     userCoins = userCoins + quizItem.difficult * 10;
-	
 	sessionStorage.setItem("token", JSON.stringify(userCoins));
-
-	
     return userCoins;
 }
 
@@ -219,7 +216,5 @@ document.addEventListener("DOMContentLoaded", () => {
     //if (pageId == "leaderboard-page") {
     //    leaderboard();
     //}
-	
-	
 });
 
