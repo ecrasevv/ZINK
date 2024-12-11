@@ -35,6 +35,7 @@ var items = document.querySelectorAll(".lboard_item");
 let index = 0;
 let userScore = 0;
 let incorrectAnswer = [];
+let coinsEarned = 0;
 
 function displayQuestion() {
     const questionInfo = quizData[index];
@@ -89,6 +90,7 @@ function checkUserAnswer() {
         if (answer === quizData[index].answer) {
             userScore++;
             userCoins = calculateCoins(quizData[index]);
+            coinsEarned = coinsEarned + quizData[index].difficult * 10;
         } else {
             incorrectAnswer.push({
                 question: quizData[index].question,
@@ -125,11 +127,8 @@ function displayResult() {
         showAnswer.style.textAlign = 'center';
     }
 
-    quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${userCoins}!<br>`;
-
-    if (document.body.id == "profile-page") {
-        showUserChart();
-    }
+    quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${coinsEarned}!<br>`;
+    coinsEarned = 0;
 }
 
 function displayIncorrectAnswer() {
