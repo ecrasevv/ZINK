@@ -22,7 +22,6 @@ const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
 const tokensEarned = document.getElementById('token-earned');
-let profileName;
 
 // for leaderboard
 /*! try to use getElementById() */
@@ -31,6 +30,15 @@ var today = document.querySelector(".today");
 var month = document.querySelector(".month");
 var year = document.querySelector(".year");
 var items = document.querySelectorAll(".lboard_item");
+
+
+//for profile customization
+const editButton   = document.getElementById("edit-button");
+const imageUpload  = document.getElementById("image-upload");
+const profileImage = document.getElementById("default-profile");
+const profileName  = document.getElementById("profile-name"); 
+
+
 
 let index = 0;
 let userScore = 0;
@@ -225,12 +233,52 @@ function showUserTokens() {
     `<br> Tokens: ${userCoins}<br>`;
 }
 
+function customizeProfile() {
+	let isEditable = false;
+	
+	editButton.addEventListener("click", () => {
+		isEditable = !isEditable;
+		
+		if(isEditable) {
+			profileName.contentEditable = "true";
+			editButton.textContent = "Save Profile";
+			profileImage.style.cursor = "pointer";
+			profileName.focus();
+		} else {
+			profileImage.contentEditable = "false";
+			editButton.textContent = "Edit Profile";
+			profileImage.style.cursor = "default";
+		}
+	
+	profileImage.addEventListener("click", () => {
+		if(isEditable) {
+			imageUpload.click();
+		}
+	});
+	
+	imageUpload.addEventListener("change", (event) => {
+		const file = event.target.files[0];
+		
+		if(file) {
+			const reader = new FileReader();
+			
+			reader.onload = (e) => {
+				profileImage.src = e.target.result;
+			};
+			
+			reader.readAsDataURL(file);
+			}
+		});
+	});
+}
+
 // handle content based on page id
 document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
     if (pageId == "profile-page") {
         showUserChart();
         showUserTokens();
+		customizeProfile();
     }
     if (pageId == "quiz-page") {
         displayQuestion()

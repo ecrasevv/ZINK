@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile- ZINK!</title>
         <link href="css/style.css" rel="stylesheet">
-        <link href="../img/simpleLogo.jpg" rel="icon"> 
+        <link href="img/simpleLogo.jpg" rel="icon"> 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://js.stripe.com/v3/"></script>
     </head>
@@ -31,13 +31,14 @@
 
             <!-- profile left container: img, name, edit button -->
             <div class="profile-container">
-                <div class="profile-imgName">
-                    <img src="../img/defaultProfile.png" width="300" height="300"> 
-                    <div class="profile-nameContainer"> 
-                        <h3 id="profile-name">Your name</h3>
-                    </div>
-                    <button class="profile-modifyButton" type="submit"> Edit Profile </button>
-                </div>
+				<div class ="profile-leftContainer">
+					<img id="default-profile" src="img/defaultProfile.png" width="300" height="300"> 
+					<input type= "file" id="image-upload" class="hidden" accept="image/*">
+					<div class="profile-nameContainer"> 
+						<h3 id="profile-name" contenteditable= "false">Your name</h3>
+					</div>
+					<button id= "edit-button" class="profile-modifyButton" type="button"> Edit Profile </button>
+				</div>
 
                 <!-- profile right container: chart, info -->
                 <div class="profile-rightContainer">
