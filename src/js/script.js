@@ -221,12 +221,17 @@ function leaderboard() {
     /* show only the content of the selected pane */
 }
 
+function showUserTokens() {
+    tokensEarned.innerHTML = 
+    `<br> Tokens: ${userCoins}<br>`;
+}
+
 // handle content based on page id
 document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
     if (pageId == "profile-page") {
         showUserChart();
-		tokensEarned.innerHTML = `<br> Tokens: ${userCoins}<br>`;
+        showUserTokens();
     }
     if (pageId == "quiz-page") {
         displayQuestion()
