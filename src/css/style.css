@@ -354,11 +354,14 @@ main {
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid #ddd;
+    border-radius: 10px;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	width: 520px;
-	height: 550px;
-	margin-top: 10px;
-	margin-left: 30px;
+	height: 560px;
+}
+
+.img-profile {
+    margin-top: 10px;
 }
 
 .profile-leftContainer .profile-nameContainer {
@@ -416,8 +419,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 	width: 520px;
-	height: 550px;
-	margin-top: 10px;
+	height: 560px;
 	margin-left: 30px;
 }
 
@@ -430,7 +432,6 @@ main {
 	border: 1px solid #ddd;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 	border-radius: 10px;
-	margin-top: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -451,7 +452,7 @@ main {
 }
 
 .profile-rightContainer .buybutton-container {
-	padding-top: 60px;
+    margin-top: 20px;
 	justify-content: center;
 }
 
