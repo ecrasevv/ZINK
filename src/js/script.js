@@ -226,12 +226,23 @@ function showUserTokens() {
 
 // change user profile name and profile image
 function customizeProfile() {
+    const savedProfileName = sessionStorage.getItem("profileName");
+    const savedProfileImage = sessionStorage.getItem("profileImage");
+
+    if (savedProfileName) {
+        profileName.textContent = savedProfileName;
+    }
+    if (savedProfileImage) {
+        profileImage.src = savedProfileImage;
+    }
+
     editButton.addEventListener("click", () => {
         if (editButton.textContent === "Edit Profile") {
-            profileName.contentEditable = "true";
             profileName.textContent = "";
+            profileName.contentEditable = "true";
             profileName.focus();
             editButton.textContent = "Save Profile";
+            profileImage.style.cursor = "pointer";
 
             profileImage.addEventListener("click", () => {
                 imageUpload.click();
@@ -247,19 +258,24 @@ function customizeProfile() {
                     reader.readAsDataURL(file);
                 }
             });
-        } else if (editButton.textContent === "Save Profile") {
-            const newProfileName = profileName.textContent.trim(); 
-            // check for spaces with regExp \s
-            if (newProfileName.length === 0 || newProfileName.length > 10 || /\s/.test(newProfileName)) {
-                alert("The new name must not contain spaces and must be less than 10 characters");
-                profileName.contentEditable = "true";
-                editButton.textContent = "Save Profile";
-                profileName.textContent = "";
-                profileName.focus();
-                return;
-            }
+        } else {
             profileName.contentEditable = "false";
             editButton.textContent = "Edit Profile";
+
+            // save new name
+            const newProfileName = profileName.textContent.trim();
+
+            // check new name lenght and check for spaces with \s regExp
+            if (newProfileName.length === 0 || newProfileName.length > 10 || /\s/.test(newProfileName)) {
+                alert("The new name must not contain spaces and must be less than 10 characters!");
+                profileName.contentEditable = "true";
+                editButton.textContent = "Save Profile";
+                return;
+            }
+
+            // save changes in sessionStorage
+            sessionStorage.setItem("profileName", newProfileName);
+            sessionStorage.setItem("profileImage", profileImage.src);
             alert("Profile updated successfully!");
         }
     });
