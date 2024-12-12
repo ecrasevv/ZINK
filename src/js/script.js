@@ -224,44 +224,44 @@ function showUserTokens() {
     `<br> Tokens: ${userCoins}<br>`;
 }
 
-//! fix
+// change user profile name and profile image
 function customizeProfile() {
-    let isEditable = false;
-
     editButton.addEventListener("click", () => {
-        profileName.textContent = "";
-        isEditable = !isEditable;
-
-        if (isEditable) {
+        if (editButton.textContent === "Edit Profile") {
             profileName.contentEditable = "true";
-            editButton.textContent = "Save Profile";
-            profileImage.style.cursor = "pointer";
+            profileName.textContent = "";
             profileName.focus();
-        } else {
-            profileImage.contentEditable = "false";
-            editButton.textContent = "Edit Profile";
-            profileImage.style.cursor = "default";
-        }
+            editButton.textContent = "Save Profile";
 
-        profileImage.addEventListener("click", () => {
-            if(isEditable) {
+            profileImage.addEventListener("click", () => {
                 imageUpload.click();
+            });
+
+            imageUpload.addEventListener("change", (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        profileImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        } else if (editButton.textContent === "Save Profile") {
+            const newProfileName = profileName.textContent.trim(); 
+            // check for spaces with regExp \s
+            if (newProfileName.length === 0 || newProfileName.length > 10 || /\s/.test(newProfileName)) {
+                alert("The new name must not contain spaces and must be less than 10 characters");
+                profileName.contentEditable = "true";
+                editButton.textContent = "Save Profile";
+                profileName.textContent = "";
+                profileName.focus();
+                return;
             }
-        });
-
-        imageUpload.addEventListener("change", (event) => {
-            const file = event.target.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                reader.onload = (e) => {
-                    profileImage.src = e.target.result;
-                };
-
-                reader.readAsDataURL(file);
-            }
-        });
+            profileName.contentEditable = "false";
+            editButton.textContent = "Edit Profile";
+            alert("Profile updated successfully!");
+        }
     });
 }
 
