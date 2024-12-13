@@ -216,6 +216,7 @@ async function callApi() {
 
         if (response.status === 200) {
             window.location.href = 'index.html';
+            sessionStorage.setItem("profileName", responseBody.user.firstName);
         } else {
             if (response.status === 401) {
                 alert("Wrong credentials, try again!");
@@ -256,6 +257,7 @@ function showHidePassword() {
 
 // set the name of the user in the profile page
 function setProfileName() {
+    profileName.textContent = sessionStorage.getItem('username');
 }
 
 function showUserTokens() {
@@ -335,8 +337,8 @@ document.addEventListener("DOMContentLoaded", () => {
         showAnswer.addEventListener('click', displayIncorrectAnswer);
     }
     if (pageId == "login-page") {
-        getCredentials();
         checkPassword();
+        getCredentials();
         showHidePassword();
     }
 });
