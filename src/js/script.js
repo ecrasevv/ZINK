@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 let chartData = JSON.parse(sessionStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 let userCoins = JSON.parse(sessionStorage.getItem("token")) || 0;
 let username = JSON.parse(sessionStorage.getItem('username')) || null;
@@ -188,11 +186,13 @@ function showUserChart() {
 // get credetials
 function getCredentials() {
     const loginButton = document.getElementById('login-button');
-    loginButton.addEventListener('click', () => {
+    loginButton.addEventListener('click', function(event) {
+        event.preventDefault();
         username = document.getElementById('usermail').value;
         password = document.getElementById('userpassword').value;
         sessionStorage.setItem('username', JSON.stringify(username));
         sessionStorage.setItem('password', JSON.stringify(password));
+        callApi();
     });
 }
 
@@ -215,14 +215,17 @@ async function callApi() {
         console.log('Response API:', responseBody);
 
         if (response.status === 200) {
-            window.location.href = "index.html";
-        } else if (response.status === 500) {
-            alert("Invalid credentials.");
+            window.location.href = 'index.html';
         } else {
-            alert("Error");
+            if (response.status === 401) {
+                alert("Wrong credentials, try again!");
+            } else {
+                alert("Error, try again later.");
+            }
         } 
     } catch (error) {
         console.log("error: " + error);
+        alert("API error.");
     }
 }
 
