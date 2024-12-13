@@ -1,7 +1,11 @@
+const { response } = require("express");
+
 let chartData = JSON.parse(sessionStorage.getItem('charData')) || [0,0,0,0,0,0,0];
 let userCoins = JSON.parse(sessionStorage.getItem("token")) || 0;
+let username = JSON.parse(sessionStorage.getItem('username')) || null;
+let password = JSON.parse(sessionStorage.getItem('password')) || null;
 
-/// example quiz
+// example quiz
 const quizData = [
     {
         question: 'How much is 2+2?',
@@ -181,10 +185,45 @@ function showUserChart() {
     });
 }
 
-/**
- * API
- */
-function callApi() {
+// get credetials
+function getCredentials() {
+    const loginButton = document.getElementById('login-button');
+    loginButton.addEventListener('click', () => {
+        username = document.getElementById('usermail').value;
+        password = document.getElementById('userpassword').value;
+        sessionStorage.setItem('username', JSON.stringify(username));
+        sessionStorage.setItem('password', JSON.stringify(password));
+    });
+}
+
+// API for the login
+async function callApi() {
+    const baseUrl = "https://api.uniparthenope.it";
+    const apiUrl = `${baseUrl}/UniparthenopeApp/v1/login`;
+
+    const headers = new Headers({
+        'Authorization': 'Basic ' + btoa(`${username}:${password}`)  
+    });
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: headers
+        });
+        console.log("Response status: " + response.status);
+        const responseBody = await response.json();
+        console.log('Response API:', responseBody);
+
+        if (response.status === 200) {
+            window.location.href = "index.html";
+        } else if (response.status === 500) {
+            alert("Invalid credentials.");
+        } else {
+            alert("Error");
+        } 
+    } catch (error) {
+        console.log("error: " + error);
+    }
 }
 
 function checkPassword() {
@@ -192,7 +231,7 @@ function checkPassword() {
     loginForm.addEventListener('submit', function(event) {
         const passwordInput = document.getElementById('userpassword');
         if (passwordInput.value.length < 8) {
-            alert('password must be minimum 8 characters long.');
+            alert('Password must be minimum 8 characters long.');
             event.preventDefault();
         }
     });
@@ -211,9 +250,6 @@ function showHidePassword() {
     });
 }
 
-// get the username from the login form
-function getProfileName() {
-}
 
 // set the name of the user in the profile page
 function setProfileName() {
@@ -296,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showAnswer.addEventListener('click', displayIncorrectAnswer);
     }
     if (pageId == "login-page") {
-        // callApi();
+        getCredentials();
         checkPassword();
         showHidePassword();
     }
