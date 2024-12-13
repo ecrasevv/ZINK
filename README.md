@@ -1,6 +1,12 @@
 # ZINK!
-A simple web app for students.
+*ZINK!* is a web app designed for Uniparthenope's students.
+Login with your *Esse3* credentials and have fun doing quizzes!
+
+## TOKENS
+Tokens are coins that will allow you to purchase clues for quizzes.
+You will earn tokens by answering quizzes correctly.
+You can decide to buy tokens inside the profile page.
 
 ### TODO:
-- [ ] create the profile and the tokens page
-- [ ] implement the leaderboard
+- [ ] add hints that can be purchased with tokens.
+
