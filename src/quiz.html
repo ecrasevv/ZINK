@@ -25,17 +25,26 @@
         <main class="quiz-content">
             <div class="text-container">
                 <h1>Let's do some quiz!</h1>
-                <p>Explore our quiz...</p>
+				<p>Explore our quiz...</p>
             </div>
+			<div class="quiz-BigContainer">
+			
+				<div class="quiz-tokenContainer">
+					  <div id= "token-earned"></div>
+					  <button class="button">Get Hint!</button>
+				</div>
+				
             <!-- Various quiz -->
-            <div class="quiz-container">
-                <canvas id="quizChart" style="display: none"></canvas>
-                <div id="quiz"></div>
-                <div id="quiz-result"></div>
-                <button id="submit" class="button">Submit</button>
-                <button id="show-incorrect-ans" class="button">Show Answer</button>
-            </div>
+				<div class="quiz-SmallContainer">
+					<canvas id="quizChart" style="display: none"></canvas>
+					<div id="quiz"></div>
+					<div id="quiz-result"></div>
+					<button id="submit" class="button">Submit</button>
+					<button id="show-incorrect-ans" class="button">Show Answer</button>
+				</div>
+			</div>
         </main>
+        
 
         <script src="js/script.js"></script>
     </body>

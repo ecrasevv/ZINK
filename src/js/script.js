@@ -19,11 +19,12 @@ const quizData = [
     }
 ]
 
+//for quiz
 const quizContainer = document.getElementById('quiz');
 const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
-const tokensEarned = document.getElementById('token-earned');
+const tokensEarned = document.getElementById('token-earned'); //also used to show tokens in profile page
 
 // for leaderboard
 var tabs = document.querySelectorAll(".leaderboard-tabs ul li");
@@ -151,7 +152,7 @@ function displayIncorrectAnswer() {
 
 // using Chart.js to visualize user performance for the week
 function showUserChart() {
-    const xValuesDays = ["D", "L", "M", "M", "G", "V", "S"];
+    const xValuesDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
     const storedChartData = JSON.parse(sessionStorage.getItem('chartData')) || [0, 0, 0, 0, 0, 0, 0];
 
     new Chart("userProgressChart", {
@@ -262,7 +263,10 @@ function setProfileName() {
 
 function showUserTokens() {
     tokensEarned.innerHTML = 
-    `<br> Tokens: ${userCoins}<br>`;
+    `<br> Your tokens: ${userCoins}<br>`;
+	
+	tokensEarned.style.fontWeight = 'bold';
+	
 }
 
 // change user profile name and profile image
@@ -331,6 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		customizeProfile();
     }
     if (pageId == "quiz-page") {
+		showUserTokens();
         displayQuestion()
         showAnswer.style.display = 'none';
         submitButton.addEventListener('click', checkUserAnswer);
