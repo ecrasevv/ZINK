@@ -245,14 +245,15 @@ main {
 .quiz-BigContainer .quiz-SmallContainer {
     width: 450px;
     padding: 20px;
-	margin-left: 180px;
     background-color: #fff;
     color: #000000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
 }
 
-
+.tokens-earned {
+    display: inline-flex;
+}
 
 .quiz-BigContainer .quiz-tokenContainer {
 	width: 250px;
