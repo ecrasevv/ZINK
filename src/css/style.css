@@ -340,6 +340,12 @@ main {
   font-weight: bold;
 }
 
+.hint-wrong {
+	text-decoration: line-through;
+	text-decoration-color: red;
+	text-decoration-thickness: 2px;
+}
+
 /*PROFILE*/
 .profile-content {
     background-image: url('../../img/bg.png');
