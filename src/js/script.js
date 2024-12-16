@@ -25,6 +25,7 @@ const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
 const tokensEarned = document.getElementById('token-earned'); //also used to show tokens in profile page
+const getHintButton = document.getElementById('get-hint');
 
 // for leaderboard
 var tabs = document.querySelectorAll(".leaderboard-tabs ul li");
@@ -82,7 +83,7 @@ function displayQuestion() {
 // add the result to the userCoin
 function calculateCoins(quizItem) {
     userCoins = userCoins + quizItem.difficult * 10;
-	sessionStorage.setItem("token", JSON.stringify(userCoins));
+    sessionStorage.setItem("token", JSON.stringify(userCoins));
     return userCoins;
 }
 
@@ -107,10 +108,10 @@ function checkUserAnswer() {
         }
         // increment -> goto next question in quizData
         index++;
-        
+
         // reset
         userSelectedOption.checked = false;
-        
+
         // < : next question
         // > : result
         if (index < quizData.length) {
@@ -126,6 +127,8 @@ function checkUserAnswer() {
 function displayResult() {
     quizContainer.style.display = 'none';
     submitButton.style.display = 'none';
+    getHintButton.style.display = 'none';
+    tokensEarned.style.display = 'none';
 
     // if the user has answered at least one question incorrectly 
     if (incorrectAnswer.length > 0) {
@@ -143,10 +146,10 @@ function displayIncorrectAnswer() {
     for (let i = 0; i < incorrectAnswer.length; i++) {
         quizResult.innerHTML += 
         `
-        <br>Qestion: ${incorrectAnswer[i].question}<br>
-        Your guess: ${incorrectAnswer[i].incorrect}<br>
-        Correct guess: ${incorrectAnswer[i].correct}<br>
-        `
+<br>Qestion: ${incorrectAnswer[i].question}<br>
+Your guess: ${incorrectAnswer[i].incorrect}<br>
+Correct guess: ${incorrectAnswer[i].correct}<br>
+`
     }
 }
 
@@ -189,7 +192,7 @@ function getCredentials() {
     const loginButton = document.getElementById('login-button');
     loginButton.addEventListener('click', function(event) {
         event.preventDefault();
-        username = document.getElementById('usermail').value;
+        username = document.getElementById('fiscal-code').value;
         password = document.getElementById('userpassword').value;
         sessionStorage.setItem('username', JSON.stringify(username));
         sessionStorage.setItem('password', JSON.stringify(password));
@@ -255,7 +258,6 @@ function showHidePassword() {
     });
 }
 
-
 // set the name of the user in the profile page
 function setProfileName() {
     profileName.textContent = sessionStorage.getItem('username');
@@ -263,10 +265,10 @@ function setProfileName() {
 
 function showUserTokens() {
     tokensEarned.innerHTML = 
-    `<br> Your tokens: ${userCoins}<br>`;
-	
-	tokensEarned.style.fontWeight = 'bold';
-	
+        `<br> Your tokens: ${userCoins}<br>`;
+
+    tokensEarned.style.fontWeight = 'bold';
+
 }
 
 // change user profile name and profile image
@@ -332,10 +334,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (pageId == "profile-page") {
         showUserChart();
         showUserTokens();
-		customizeProfile();
+        customizeProfile();
     }
     if (pageId == "quiz-page") {
-		showUserTokens();
+        showUserTokens();
         displayQuestion()
         showAnswer.style.display = 'none';
         submitButton.addEventListener('click', checkUserAnswer);
