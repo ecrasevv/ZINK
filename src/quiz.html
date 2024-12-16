@@ -25,7 +25,21 @@
         <main class="quiz-content">
             <div class="text-container">
                 <h1>Let's do some quiz!</h1>
-				<p>Explore our quiz...</p>
+                <p>Explore our quiz...</p>
+            </div>
+            <div class="quiz-BigContainer">
+
+
+                <!-- Various quiz -->
+                <div class="quiz-SmallContainer">
+                    <canvas id="quizChart" style="display: none"></canvas>
+                    <div id="quiz"></div>
+                    <div id="quiz-result"></div>
+                    <button id="submit" class="button">Submit</button>
+                    <button id="show-incorrect-ans" class="button">Show Answer</button>
+                    <button id="get-hint" class="button">Get Hint!</button>
+                    <div id="token-earned" class="tokens-earned"></div>
+                </div>
             </div>
 			<div class="quiz-BigContainer">
 			
@@ -43,8 +57,9 @@
 					<button id="show-incorrect-ans" class="button">Show Answer</button>
 				</div>
 			</div>
+
         </main>
-        
+
 
         <script src="js/script.js"></script>
     </body>
