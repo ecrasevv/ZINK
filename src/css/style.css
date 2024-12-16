@@ -232,15 +232,43 @@ main {
     flex-direction: column;
 }
 
-.quiz-content .quiz-container {
+
+.quiz-content .quiz-BigContainer {
+	width: 100%px;
+	min-height: 100vh;
+	padding-top: 80px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.quiz-BigContainer .quiz-SmallContainer {
     width: 450px;
     padding: 20px;
-    margin-top: 80px;
+	margin-left: 180px;
     background-color: #fff;
     color: #000000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
 }
+
+
+
+.quiz-BigContainer .quiz-tokenContainer {
+	width: 250px;
+	height:130px;
+	padding:20px;
+	background-color: #fff;
+    color: #000000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+	text-align: center;
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+	gap: 20px;
+}
+
 
 .quiz-content .text-container {
     display: flex;
@@ -261,10 +289,12 @@ main {
 
 .quiz-content p {
     font-size: 1.5rem;
+	font-weight: bold;
     color: #ffffff;
     width: 80%;
     max-width: 900px;
 }
+
 
 .quiz-content button {
   display: inline-block;
@@ -457,10 +487,8 @@ main {
 	justify-content: center;
 }
 
-.profile-rightContainer .token-earned {
-	justify-content: flex-start;
-	font-weight: bold;
-}
+
+
 
 /* LEADERBOARD */
 .leaderboard-content {
