@@ -6,25 +6,108 @@ let password = JSON.parse(sessionStorage.getItem('password')) || null;
 // example quiz
 const quizData = [
     {
-        question: 'How much is 2+2?',
-        options: ['5', '4', '10', '8'],
-        answer: '4',
+        question: 'What is the binary representation of the decimal number 5?',
+        options: ['101', '110', '111', '100'],
+        answer: '101',
+        difficult: 0.4,
+    },
+    {
+        question: 'Which of these is not a programming language?',
+        options: ['Python', 'Java', 'HTML', 'C++'],
+        answer: 'HTML',
+        difficult: 0.2,
+    },
+	{
+        question: 'Which data structure uses the LIFO principle?',
+        options: ['Queue', 'Stack', 'Array', 'Graph'],
+        answer: 'Stack',
+        difficult: 0.3,
+    },
+	{
+        question: 'What does HTTP stand for?',
+        options: ['HyperText Transfer Protocol', 'HighText Transfer Protocol', 'Hyper Transfer Text Protocol', 'HyperText Transmission Path'],
+        answer: 'HyperText Transfer Protocol',
+        difficult: 0.2,
+    },
+	{
+        question: 'Which of the following is used to syle web pages?',
+        options: ['HTML', 'CSS', 'Python', 'SQL'],
+        answer: 'CSS',
         difficult: 0.1,
     },
     {
-        question: 'What is the capital of Italy?',
-        options: ['Rome', 'Tourin', 'Milan', 'Naples'],
-        answer: 'Rome',
+        question: 'What is the time complexity of searching for an element in a binary search tree (average case)?',
+        options: ['O(n)', 'O(log n)', 'O(n^2)', 'O(1)'],
+        answer: 'O(log n)',
+        difficult: 0.5,
+    },
+    {
+        question: 'What is a correct syntax to output "Hello, World!" in Python?',
+        options: [
+            'echo "Hello, World!"',
+            'console.log("Hello, World!")',
+            'print("Hello, World!")',
+            'System.out.println("Hello, World!");',
+        ],
+        answer: 'print("Hello, World!")',
+        difficult: 0.2,
+    },
+    {
+        question: 'Which of the following is a type of operating system?',
+        options: ['Windows', 'Excel', 'Chrome', 'Photoshop'],
+        answer: 'Windows',
+        difficult: 0.1,
+    },
+    {
+        question: 'What is the primary purpose of a compiler?',
+        options: [
+            'To execute the code directly',
+            'To convert high-level code into machine code',
+            'To interpret the code line by line',
+            'To debug the code',
+        ],
+        answer: 'To convert high-level code into machine code',
         difficult: 0.3,
+    },
+    {
+        question: 'Which of these is a correct variable name in most programming languages?',
+        options: ['1variable', 'variable_1', 'variable-1', 'var iable'],
+        answer: 'variable_1',
+        difficult: 0.2,
+    },
+    {
+        question: 'What does "RAM" stand for in computing?',
+        options: [
+            'Random Access Memory',
+            'Read Access Memory',
+            'Random Allocation Module',
+            'Read Allocation Memory',
+        ],
+        answer: 'Random Access Memory',
+        difficult: 0.1,
+    },
+    {
+        question: 'What is the output of 7 % 3 in most programming languages?',
+        options: ['1', '2', '3', '0'],
+        answer: '1',
+        difficult: 0.3,
+    },
+    {
+        question: 'Which one of these is an example of an IDE?',
+        options: ['Microsoft Word', 'PyCharm', 'Linux', 'Apache'],
+        answer: 'PyCharm',
+        difficult: 0.2,
     }
-]
+];
 
+	
 //for quiz
 const quizContainer = document.getElementById('quiz');
 const quizResult = document.getElementById('quiz-result');
 const submitButton = document.getElementById('submit');
 const showAnswer = document.getElementById('show-incorrect-ans');
 const tokensEarned = document.getElementById('token-earned'); //also used to show tokens in profile page
+const getHintButton = document.getElementById('get-Hint');
 
 // for leaderboard
 var tabs = document.querySelectorAll(".leaderboard-tabs ul li");
@@ -43,6 +126,7 @@ let index = 0;
 let userScore = 0;
 let incorrectAnswer = [];
 let coinsEarned = 0;
+let indexIncorrect = 0; //index to scroll through incorrect options for a question
 
 function displayQuestion() {
     const questionInfo = quizData[index];
@@ -83,6 +167,7 @@ function displayQuestion() {
 function calculateCoins(quizItem) {
     userCoins = userCoins + quizItem.difficult * 10;
 	sessionStorage.setItem("token", JSON.stringify(userCoins));
+	
     return userCoins;
 }
 
@@ -114,7 +199,9 @@ function checkUserAnswer() {
         // < : next question
         // > : result
         if (index < quizData.length) {
-            displayQuestion();
+            indexIncorrect = 0; //reset the index of the incorrect options for the new question
+			displayQuestion();
+			
         } else {
             chartData[todayIndex] += userScore;
             sessionStorage.setItem('chartData', JSON.stringify(chartData));
@@ -148,6 +235,42 @@ function displayIncorrectAnswer() {
         Correct guess: ${incorrectAnswer[i].correct}<br>
         `
     }
+}
+
+//Function to get hints on quiz
+function getHint() {
+	const questionInfo = quizData[index];
+	const options = document.querySelectorAll('.single-option');
+	const incorrectOptions = Array.from(options).filter(answ => {//filter through and get incorrect answers as DOM elements
+		const radio = answ.querySelector('input[type= "radio"]'); 
+		return radio && radio.value != questionInfo.answer;
+	});
+
+	
+	if(userCoins <= 0) {
+		 alert("Not enough tokens!!");
+		 return;
+	} 
+		
+	if(indexIncorrect >= 0 && indexIncorrect < incorrectOptions.length) {
+		if(questionInfo.difficult >= 0.1 && questionInfo.difficult <= 0.2) {
+			userCoins -= 1;
+		} else if(questionInfo.difficult >= 0.3 && questionInfo.difficult <= 0.4) {
+			userCoins -= 2;
+		} else {
+			userCoins -= 3;
+		}
+			
+		incorrectOptions[indexIncorrect].classList.add('hint-wrong');
+		indexIncorrect++;
+			
+		sessionStorage.setItem("token", JSON.stringify(userCoins));
+		document.getElementById("token-earned").textContent = ` Your tokens: ${userCoins}`;
+	} else {
+			alert("No more hints!!");
+	}
+	
+	
 }
 
 // using Chart.js to visualize user performance for the week
@@ -184,7 +307,7 @@ function showUserChart() {
     });
 }
 
-// get credetials
+// get credentials
 function getCredentials() {
     const loginButton = document.getElementById('login-button');
     loginButton.addEventListener('click', function(event) {
@@ -326,21 +449,28 @@ function customizeProfile() {
     });
 }
 
+
+
+
 // handle content based on page id
 document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
+	
     if (pageId == "profile-page") {
         showUserChart();
         showUserTokens();
 		customizeProfile();
     }
+	
     if (pageId == "quiz-page") {
+		getHintButton.addEventListener('click', getHint);
 		showUserTokens();
         displayQuestion()
         showAnswer.style.display = 'none';
         submitButton.addEventListener('click', checkUserAnswer);
         showAnswer.addEventListener('click', displayIncorrectAnswer);
     }
+	
     if (pageId == "login-page") {
         checkPassword();
         getCredentials();
