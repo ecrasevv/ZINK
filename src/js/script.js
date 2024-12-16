@@ -17,19 +17,19 @@ const quizData = [
         answer: 'HTML',
         difficult: 0.2,
     },
-	{
+    {
         question: 'Which data structure uses the LIFO principle?',
         options: ['Queue', 'Stack', 'Array', 'Graph'],
         answer: 'Stack',
         difficult: 0.3,
     },
-	{
+    {
         question: 'What does HTTP stand for?',
         options: ['HyperText Transfer Protocol', 'HighText Transfer Protocol', 'Hyper Transfer Text Protocol', 'HyperText Transmission Path'],
         answer: 'HyperText Transfer Protocol',
         difficult: 0.2,
     },
-	{
+    {
         question: 'Which of the following is used to syle web pages?',
         options: ['HTML', 'CSS', 'Python', 'SQL'],
         answer: 'CSS',
@@ -100,7 +100,7 @@ const quizData = [
     }
 ];
 
-	
+
 //for quiz
 const quizContainer = document.getElementById('quiz');
 const quizResult = document.getElementById('quiz-result');
@@ -166,7 +166,7 @@ function displayQuestion() {
 // add the result to the userCoin
 function calculateCoins(quizItem) {
     userCoins = userCoins + quizItem.difficult * 10;
-   	sessionStorage.setItem("token", JSON.stringify(userCoins));
+    sessionStorage.setItem("token", JSON.stringify(userCoins));
     return userCoins;
 }
 
@@ -199,8 +199,8 @@ function checkUserAnswer() {
         // > : result
         if (index < quizData.length) {
             indexIncorrect = 0; //reset the index of the incorrect options for the new question
-			displayQuestion();
-			
+            displayQuestion();
+
         } else {
             chartData[todayIndex] += userScore;
             sessionStorage.setItem('chartData', JSON.stringify(chartData));
@@ -240,38 +240,36 @@ Correct guess: ${incorrectAnswer[i].correct}<br>
 
 //Function to get hints on quiz
 function getHint() {
-	const questionInfo = quizData[index];
-	const options = document.querySelectorAll('.single-option');
-	const incorrectOptions = Array.from(options).filter(answ => {//filter through and get incorrect answers as DOM elements
-		const radio = answ.querySelector('input[type= "radio"]'); 
-		return radio && radio.value != questionInfo.answer;
-	});
+    const questionInfo = quizData[index];
+    const options = document.querySelectorAll('.single-option');
+    //filter through and get incorrect answers as DOM elements
+    const incorrectOptions = Array.from(options).filter(answ => {
+        const radio = answ.querySelector('input[type= "radio"]'); 
+        return radio && radio.value != questionInfo.answer;
+    });
 
-	
-	if(userCoins <= 0) {
-		 alert("Not enough tokens!!");
-		 return;
-	} 
-		
-	if(indexIncorrect >= 0 && indexIncorrect < incorrectOptions.length) {
-		if(questionInfo.difficult >= 0.1 && questionInfo.difficult <= 0.2) {
-			userCoins -= 1;
-		} else if(questionInfo.difficult >= 0.3 && questionInfo.difficult <= 0.4) {
-			userCoins -= 2;
-		} else {
-			userCoins -= 3;
-		}
-			
-		incorrectOptions[indexIncorrect].classList.add('hint-wrong');
-		indexIncorrect++;
-			
-		sessionStorage.setItem("token", JSON.stringify(userCoins));
-		document.getElementById("token-earned").textContent = ` Your tokens: ${userCoins}`;
-	} else {
-			alert("No more hints!!");
-	}
-	
-	
+    if(userCoins <= 0) {
+        alert("Not enough tokens!!");
+        return;
+    } 
+
+    if(indexIncorrect >= 0 && indexIncorrect < incorrectOptions.length) {
+        if(questionInfo.difficult >= 0.1 && questionInfo.difficult <= 0.2) {
+            userCoins -= 1;
+        } else if(questionInfo.difficult >= 0.3 && questionInfo.difficult <= 0.4) {
+            userCoins -= 2;
+        } else {
+            userCoins -= 3;
+        }
+
+        incorrectOptions[indexIncorrect].classList.add('hint-wrong');
+        indexIncorrect++;
+
+        sessionStorage.setItem("token", JSON.stringify(userCoins));
+        document.getElementById("token-earned").textContent = ` Your tokens: ${userCoins}`;
+    } else {
+        alert("No more hints!!");
+    }
 }
 
 // using Chart.js to visualize user performance for the week
@@ -449,28 +447,25 @@ function customizeProfile() {
     });
 }
 
-
-
-
 // handle content based on page id
 document.addEventListener("DOMContentLoaded", () => {
     const pageId = document.body.id;
-	
+
     if (pageId == "profile-page") {
         showUserChart();
         showUserTokens();
         customizeProfile();
     }
-	
+
     if (pageId == "quiz-page") {
-		    getHintButton.addEventListener('click', getHint);
-		    showUserTokens();
+        showUserTokens();
         displayQuestion()
+        getHintButton.addEventListener('click', getHint);
         showAnswer.style.display = 'none';
         submitButton.addEventListener('click', checkUserAnswer);
         showAnswer.addEventListener('click', displayIncorrectAnswer);
     }
-	
+
     if (pageId == "login-page") {
         checkPassword();
         getCredentials();
