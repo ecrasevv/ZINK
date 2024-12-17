@@ -125,6 +125,7 @@ const profileName  = document.getElementById("profile-name");
 let index = 0;
 let userScore = 0;
 let incorrectAnswer = [];
+let earnedCoinsDuringQuiz = 0;
 let coinsEarned = 0;
 let indexIncorrect = 0; //index to scroll through incorrect options for a question
 
@@ -165,9 +166,7 @@ function displayQuestion() {
 // multiply the difficult value of the passed question * 10
 // add the result to the userCoin
 function calculateCoins(quizItem) {
-    userCoins = userCoins + quizItem.difficult * 10;
-    sessionStorage.setItem("token", JSON.stringify(userCoins));
-    return userCoins;
+    return quizItem.difficult * 10;
 }
 
 function checkUserAnswer() {
@@ -180,8 +179,8 @@ function checkUserAnswer() {
         // for now the questions will be asked in the same order as they are present within quizData 
         if (answer === quizData[index].answer) {
             userScore++;
-            userCoins = calculateCoins(quizData[index]);
             coinsEarned = coinsEarned + quizData[index].difficult * 10;
+			
         } else {
             incorrectAnswer.push({
                 question: quizData[index].question,
@@ -202,6 +201,7 @@ function checkUserAnswer() {
             displayQuestion();
 
         } else {
+			
             chartData[todayIndex] += userScore;
             sessionStorage.setItem('chartData', JSON.stringify(chartData));
             displayResult();
@@ -221,6 +221,9 @@ function displayResult() {
         showAnswer.style.margin = '10px auto 0';
         showAnswer.style.textAlign = 'center';
     }
+	
+	userCoins += coinsEarned;
+	sessionStorage.setItem("token", JSON.stringify(userCoins));
 
     quizResult.innerHTML = `You scored ${userScore} out of ${quizData.length}, coins earned: ${coinsEarned}!<br>`;
     coinsEarned = 0;
@@ -231,11 +234,13 @@ function displayIncorrectAnswer() {
     for (let i = 0; i < incorrectAnswer.length; i++) {
         quizResult.innerHTML += 
         `
-<br>Qestion: ${incorrectAnswer[i].question}<br>
-Your guess: ${incorrectAnswer[i].incorrect}<br>
-Correct guess: ${incorrectAnswer[i].correct}<br>
+	<br>Qestion: ${incorrectAnswer[i].question}<br>
+	Your guess: ${incorrectAnswer[i].incorrect}<br>
+	Correct guess: ${incorrectAnswer[i].correct}<br>
 `
     }
+	
+	
 }
 
 //Function to get hints on quiz
@@ -254,19 +259,30 @@ function getHint() {
     } 
 
     if(indexIncorrect >= 0 && indexIncorrect < incorrectOptions.length) {
-        if(questionInfo.difficult >= 0.1 && questionInfo.difficult <= 0.2) {
+        if(questionInfo.difficult >= 0.1 && questionInfo.difficult <= 0.2 && userCoins >= 1) {
+			console.log("Difficulty: 0.1, 0.2 (-1) and userCoins before: ", userCoins);
             userCoins -= 1;
-        } else if(questionInfo.difficult >= 0.3 && questionInfo.difficult <= 0.4) {
+			console.log("Difficulty: 0.1, 0.2 and userCoins before: ", userCoins);
+        } else if(questionInfo.difficult >= 0.3 && questionInfo.difficult <= 0.4  && userCoins >= 2) {
+			console.log("Difficulty: 0.3, 0.4 (-2) and userCoins before: ", userCoins);
             userCoins -= 2;
-        } else {
+			console.log("Difficulty: 0.3, 0.4 and userCoins after: ", userCoins);
+        } else if(questionInfo.difficult === 0.5 && userCoins >= 3) {
+			console.log("Difficulty: 0.5 (-3) and userCoins before: ", userCoins);
             userCoins -= 3;
-        }
+			console.log("Difficulty: 0.5 and userCoins: ", userCoins);
+        } else {
+			alert("Not enough tokens!!");
+			return;
+		}
 
         incorrectOptions[indexIncorrect].classList.add('hint-wrong');
         indexIncorrect++;
 
         sessionStorage.setItem("token", JSON.stringify(userCoins));
         document.getElementById("token-earned").textContent = ` Your tokens: ${userCoins}`;
+		
+	
     } else {
         alert("No more hints!!");
     }
